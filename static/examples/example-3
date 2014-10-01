@@ -1,0 +1,17 @@
+{# x will not be required in resulting JSON schema #}
+
+{% if x is undefined %}
+    {% set x = 'default-x' %}
+{% endif %}
+
+{{ x }}
+
+{# neither will y #}
+
+{% if y is defined %}
+    {{ y }}
+{% endif %}
+
+{# and neither will z #}
+
+{{ z|default('default-z') }}

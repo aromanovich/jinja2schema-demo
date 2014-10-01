@@ -1,0 +1,6 @@
+{% for user in users %}
+    {% if user.is_active %}
+        Active
+    {% endif %}
+    {{ user.first_name }} {{ user.last_name }}
+{% endfor %}

@@ -1,0 +1,9 @@
+{% set users = [
+    ('John', 'Doe'),
+    ('Jane', 'Doe'),
+] %}
+
+{% for (first_name, last_name) in users %}
+    {% set name = first_name ~ separator ~ last_name %}
+    {{ loop.index0 }}: {{ name }}
+{% endfor %}

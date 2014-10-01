@@ -1,0 +1,19 @@
+body {
+    margin: 20px 40px;
+}
+
+#template {
+    height: 400px;
+}
+
+#schema {
+    height: 500px;
+}
+
+#schema .ace_marker-layer .ace_selection {
+    background: transparent;
+}
+
+#schema .ace_cursor {
+    color: transparent;
+}

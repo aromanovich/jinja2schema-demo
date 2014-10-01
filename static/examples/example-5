@@ -1,0 +1,9 @@
+{% macro user(login, data) %}
+    {{ login }}
+    {{ data.field_1 }}
+    {{ data.field_2|join(separator) }}
+{% endmacro %}
+
+{% for user in users %}
+    {{ user(user.login, user.data) }}
+{% endfor %}

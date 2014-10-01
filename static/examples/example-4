@@ -1,0 +1,9 @@
+{% for x in xs %}
+    {{ x.field_1 }}
+{% endfor %}
+
+{% for ys in xs %}
+    {% for y in ys.field_2 %}
+        {{ y }}
+    {% endfor %}
+{% endfor %}

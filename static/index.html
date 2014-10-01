@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/app.css">
+
+    <script src="/static/components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script src="/static/components/angular/angular.min.js"></script>
+    <script src="/static/components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/static/components/tv4/tv4.js"></script>
+    <script src="/static/components/objectpath/lib/ObjectPath.js"></script>
+    <script src="/static/components/angular-schema-form/dist/schema-form.js"></script>
+    <script src="/static/components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+    <script src="/static/components/angular-ui-ace/ui-ace.js"></script>
+    <script src="/static/components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/static/app.js"></script>
+  </head>
+  <body ng-app="jinja2schemaDemo" ng-controller="MainCtrl">
+    <h1>jinja2schema demo</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Jinja2 template</h4>
+        <form name="templateForm" ng-submit="getSchema()">
+          <div class="form-group">
+            <label for="example">Example</label>
+            <select id="example" class="form-control"
+                    ng-options="example as example for example in examples"
+                    ng-model="example"
+                    ng-change="selectExample(example)">
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="template">Template content</label>
+            <div ui-ace="{mode: 'django'}" id="template" ng-model="template"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Infer Schema and Render Form</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div ng-if="error">
+          <h3>Error</h3>
+          <pre>{{ error }}</pre>
+        </div>
+        <div ng-if="schema"  ng-init="schemaJson = (schema|json)">
+          <h4>Inferred JSON schema</h4>
+          <div ui-ace="{mode: 'json'}" readonly="true" id="schema" ng-model="schemaJson">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div ng-if="schema">
+          <h4>Form</h4>
+          <form name="form.instance" sf-schema="schema" sf-form="['*']" sf-model="model">
+          </form>
+          <button class="btn btn-primary" type="submit" ng-click="onFormSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    © Copyright 2014, Anton Romanovich.
+
+    <script type="text/ng-template" id="modal.html">
+      <div class="modal-header">
+        <h3 class="modal-title">Form Data</h3>
+      </div>
+      <div class="modal-body">
+        <pre>{{ model|json }}</pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="$close()">OK</button>
+      </div>
+    </script>
+  </body>
+</html>
