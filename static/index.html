@@ -18,8 +18,14 @@
     <script src="/static/app.js"></script>
   </head>
   <body ng-app="jinja2schemaDemo" ng-controller="MainCtrl">
-    <h1>jinja2schema demo</h1>
-    <hr>
+    <header>
+      <h1>jinja2schema <small>type inference for Jinja2 templates</small></h1>
+      <nav>
+        <a href="http://jinja2schema.readthedocs.org/en/latest/">Documentation</a> |
+        <a href="https://github.com/aromanovich/jinja2schema">GitHub</a> |
+        <a href="https://pypi.python.org/pypi/jinja2schema">PyPI</a>
+      </nav>
+    </header>
     <div class="row">
       <div class="col-md-4">
         <h4>Jinja2 template</h4>
@@ -41,8 +47,8 @@
       </div>
       <div class="col-md-4">
         <div ng-if="error">
-          <h3>Error</h3>
-          <pre>{{ error }}</pre>
+          <h4>Error</h4>
+          <div class="alert alert-danger">{{ error }}</div>
         </div>
         <div ng-if="schema"  ng-init="schemaJson = (schema|json)">
           <h4>Inferred JSON schema</h4>
@@ -52,16 +58,17 @@
       </div>
       <div class="col-md-4">
         <div ng-if="schema">
-          <h4>Form</h4>
+          <h4>Form <small>rendered using <a href="https://github.com/Textalk/angular-schema-form">angular-schema-form</a></small></h4>
           <form name="form.instance" sf-schema="schema" sf-form="['*']" sf-model="model">
           </form>
           <button class="btn btn-primary" type="submit" ng-click="onFormSubmit()">Submit</button>
         </div>
       </div>
     </div>
-    <hr>
-    © Copyright 2014, Anton Romanovich.
-
+    <footer>
+      Powered by jinja2schema {{ jinja2schemaVersion }}.<br>
+      © Copyright 2014, <a href="mailto:anthony.romanovich@gmail.com">Anton Romanovich</a>.
+    </footer>
     <script type="text/ng-template" id="modal.html">
       <div class="modal-header">
         <h3 class="modal-title">Form Data</h3>

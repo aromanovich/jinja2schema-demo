@@ -30,17 +30,24 @@ def schema():
         struct = jinja2schema.infer(template, config)
     except jinja2schema.InferException as e:
         return flask.jsonify({
-            'message': unicode(e),
+            'message': u'jinj2schema error: {}'.format(e),
         }), 400
     except jinja2.TemplateSyntaxError as e:
         return flask.jsonify({
-            'message': [e.message],
+            'message': u'Jinja2 error: {}, line {}'.format(e.message, e.lineno),
         }), 400
     else:
         json_schema = jinja2schema.to_json_schema(struct, jsonschema_encoder=CustomJSONSchemaEncoder)
         return flask.jsonify({
-            'schema': json_schema
+            'schema': json_schema,
         })
+
+
+@app.route('/jinja2schema-version/')
+def jinja2schema_version():
+    return flask.jsonify({
+        'version': jinja2schema.__version__,
+    })
 
 
 if __name__ == '__main__':

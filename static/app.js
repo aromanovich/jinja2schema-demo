@@ -4,6 +4,10 @@
 angular.module('jinja2schemaDemo', ['schemaForm', 'ui.ace', 'ui.bootstrap'])
 
 .controller('MainCtrl', function($scope, $http, $modal) {
+    $http.get('/jinja2schema-version').then(function(resp) {
+        $scope.jinja2schemaVersion = resp.data.version;
+    });
+
     // due to ng-if scope issues
     $scope.form = {instance: null};
 

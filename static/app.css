@@ -2,6 +2,22 @@ body {
     margin: 20px 40px;
 }
 
+header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+footer {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+h4 {
+    margin-top: 0;
+}
+
 #template {
     height: 400px;
 }
@@ -9,6 +25,8 @@ body {
 #schema {
     height: 500px;
 }
+
+/* schema field is read-only, so let's hide cursor and selection */
 
 #schema .ace_marker-layer .ace_selection {
     background: transparent;
