@@ -6,16 +6,6 @@ import jinja2schema
 app = flask.Flask(__name__)
 
 
-class CustomJSONSchemaEncoder(jinja2schema.JSONSchemaDraft4Encoder):
-    def encode(self, var):
-        if isinstance(var, jinja2schema.model.Unknown) or type(var) is jinja2schema.model.Scalar:
-            rv = self.encode_common_attrs(var)
-            rv['type'] = 'string'
-        else:
-            rv = super(CustomJSONSchemaEncoder, self).encode(var)
-        return rv
-
-
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
@@ -37,7 +27,8 @@ def schema():
             'message': u'Jinja2 error: {}, line {}'.format(e.message, e.lineno),
         }), 400
     else:
-        json_schema = jinja2schema.to_json_schema(struct, jsonschema_encoder=CustomJSONSchemaEncoder)
+        json_schema = jinja2schema.to_json_schema(struct,
+                                                  jsonschema_encoder=jinja2schema.StringJSONSchemaDraft4Encoder)
         return flask.jsonify({
             'schema': json_schema,
         })
