@@ -15,8 +15,7 @@ def index():
 def schema():
     template = flask.request.get_data()
     try:
-        config = jinja2schema.Config()
-        config.CONSIDER_CONDITIONS_AS_BOOLEAN = True
+        config = jinja2schema.Config(BOOLEAN_CONDITIONS=True)
         struct = jinja2schema.infer(template, config)
     except jinja2schema.InferException as e:
         return flask.jsonify({
